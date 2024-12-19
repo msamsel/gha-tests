@@ -27,10 +27,10 @@ jobs:
       - name: Sanitize name
         id: sanitized-name
         run: |
-          FULL_BRANCH_NAME=${{ steps.branch-name.outputs.FULL_BRANCH_NAME }}
+          FULL_BRANCH_NAME="${{ steps.branch-name.outputs.FULL_BRANCH_NAME }}"
           SANITIZED_BRANCH_NAME=$(echo "$FULL_BRANCH_NAME" | tr -c '[:alnum:]\n' '-')
           echo "SANITIZED_BRANCH_NAME=$SANITIZED_BRANCH_NAME" >> "$GITHUB_OUTPUT"
 
-          LOCAL_VARIABLE=${{ inputs.entry }}
+          LOCAL_VARIABLE="${{ inputs.entry }}"
           LOCAL_SANITIZED_VARIABLE=$(echo "$LOCAL_VARIABLE" | tr -c '[:alnum:]\n' '-')
           echo "$LOCAL_SANITIZED_VARIABLE" >> "$GITHUB_OUTPUT""
