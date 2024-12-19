@@ -30,4 +30,4 @@ jobs:
           FULL_BRANCH_NAME="${{ steps.branch-name.outputs.FULL_BRANCH_NAME }}"
 
           SANITIZED_BRANCH_NAME=$(echo "$FULL_BRANCH_NAME" | tr -c '[:alnum:]\n' '-')
-          echo "SANITIZED_BRANCH_NAME=$SANITIZED_BRANCH_NAME" >> "$GITHUB_OUTPUT"
+          echo "SANITIZED_BRANCH_NAME=$SANITIZED_BRANCH_NAME"
