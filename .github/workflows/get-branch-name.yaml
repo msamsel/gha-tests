@@ -8,7 +8,7 @@ on:
       entry:
         description: 'Some random text'
         required: false
-        default: ''
+        default: 'Lorem Ipsum 🚀, and hello world'
 
 jobs:
   test_branches:
