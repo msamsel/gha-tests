@@ -29,9 +29,9 @@ jobs:
         run: |
           FULL_BRANCH_NAME="${{ steps.branch-name.outputs.FULL_BRANCH_NAME }}"
 
-          SANITIZED_BRANCH_NAME=$(echo "$FULL_BRANCH_NAME" | tr -cs '[:alnum:]' '-')
+          SANITIZED_BRANCH_NAME=$(echo "$FULL_BRANCH_NAME" | tr -d '\n' | tr -cs '[:alnum:]' '-')
           echo "SANITIZED_BRANCH_NAME=$SANITIZED_BRANCH_NAME"
 
           LOCAL_VARIABLE="${{ inputs.entry }}"
-          LOCAL_SANITIZED_VARIABLE=$(echo "$LOCAL_VARIABLE" | tr -cs '[:alnum:]' '-') 
+          LOCAL_SANITIZED_VARIABLE=$(echo "$LOCAL_VARIABLE" | tr -d '\n' | tr -cs '[:alnum:]' '-') 
           echo "$LOCAL_SANITIZED_VARIABLE"
