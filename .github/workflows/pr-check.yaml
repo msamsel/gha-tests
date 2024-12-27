@@ -11,4 +11,4 @@ concurrency:
 jobs:
   install:
     name: Install project
-    uses: ./.github/workflows/install.yml
+    uses: ./.github/workflows/install.yaml
