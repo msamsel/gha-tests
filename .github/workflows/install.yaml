@@ -29,6 +29,9 @@ jobs:
           node-version: '22'
           cache: 'yarn'
 
+      - name: Set up yarn
+        run: corepack use yarn
+
       - name: Install dependencies
         run: yarn install
 
