@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow
+
+name: Install project
+
+on:
+  workflow_call:
+    inputs:
+      cache_id:
+        default: ${{ github.sha }}
+        required: false
+        type: string
+    outputs:
+      install_cache_id:
+        value: ${{ jobs.install.outputs.cache_id }}
+
+jobs:
+  install:
+    name: Install and cache dependencies
+    runs-on: ubuntu-latest
+    outputs:
+      cache_id: ${{ steps.set_cache_id.outputs.cache_id }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup node and cache for node_modules
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Set up cache id
+        id: set_cache_id
+        run: echo "cache_id=${{ inputs.cache_id }}-${{ runner.os }}" >> $GITHUB_OUTPUT
+
+      - name: Cache installed project
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/*
+          key: ${{ steps.set_cache_id.outputs.cache_id }}
