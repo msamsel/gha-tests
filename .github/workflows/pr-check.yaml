@@ -12,3 +12,10 @@ jobs:
   install:
     name: Install project
     uses: ./.github/workflows/install.yaml
+
+  prettier:
+    name: Run prettier
+    needs: [install]
+    uses: ./.github/workflows/prettier.yaml
+    with:
+      cache_id: ${{ needs.install.outputs.install_cache_id }}
